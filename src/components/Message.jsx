@@ -12,8 +12,20 @@ const Message = ({ message }) => {
   const ref = useRef();
 
   useEffect(() => {
-    ref.current?.scrollIntoView({behaviour: "smooth"})
+    ref.current?.scrollIntoView({ behaviour: "smooth" });
   }, [message]);
+
+  // const getTime = (time) => {
+  //   var h = new Date(time).getHours();
+  //   var m = new Date(time).getMinutes();
+
+  //   h = h < 10 ? "0" + h : h;
+  //   m = m < 10 ? "0" + m : m;
+
+  //   var output = h + ":" + m;
+
+  //   return output;
+  // }
 
   return (
     <div
@@ -29,10 +41,12 @@ const Message = ({ message }) => {
           }
           alt=""
         />
-        <span>just now</span>
+        <span>
+          {message.date.toDate().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+        </span>
       </div>
       <div className="messageContent">
-        {message.text && <p>{message.text}</p> }
+        {message.text && <p>{message.text}</p>}
         {message.img && <img src={message.img} alt="" />}
       </div>
     </div>
